@@ -6,6 +6,7 @@ services:
         - "8000"
       environment:
         - PYTHONPATH=/app/
+        - DJANGO_SETTINGS_MODULE=iprest.settings_production
       command: python ip_rest/manage.py runserver 0.0.0.0:8000
       volumes:
         - ./web/ip_rest/:/app/ip_rest
