@@ -1,0 +1,25 @@
+version: '2'
+services:
+    web:
+      build: ./web/
+      expose:
+        - "8000"
+      environment:
+        - PYTHONPATH=/app/
+      command: python ip_rest/manage.py runserver 0.0.0.0:8000
+      volumes:
+        - ./web/ip_rest/:/app/ip_rest
+      depends_on:
+        - db
+
+    nginx:
+      build: ./nginx/
+      ports:
+        - "80:80"
+      volumes_from:
+        - web
+      links:
+        - web:web
+
+    db:
+        build: ./postgresql/
