@@ -5,9 +5,9 @@ services:
       expose:
         - "8000"
       environment:
-        - PYTHONPATH=/app/
+        - PYTHONPATH=/app/ip_rest
         - DJANGO_SETTINGS_MODULE=iprest.settings_production
-      command: python ip_rest/manage.py runserver 0.0.0.0:8000
+      command: gunicorn iprest.wsgi -c ip_rest/iprest/gunicorn.conf.py
       volumes:
         - ./web/ip_rest/:/app/ip_rest
       depends_on:
